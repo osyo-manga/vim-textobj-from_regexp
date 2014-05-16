@@ -1,0 +1,51 @@
+*textobj-from_regexp.txt*	設定した正規表現パターンの範囲の textobj
+
+
+==============================================================================
+概要					*textobj-from_regexp-introduction*
+
+任意の正規表現パターンにマッチする範囲を対象とする textobj です。
+このプラグインは |operator#from_regexp#mapexpr()| を任意のキーに割り当てて使用
+します。
+
+このプラグインを使用する場合は kana 氏が作成された |textobj-user| が必要になり
+ます。
+
+- kana/vim-textobj-user - https://github.com/kana/vim-textobj-user
+
+
+==============================================================================
+設定例						*textobj-from_regexp-example*
+>
+	" 英数字と _ にマッチする範囲
+	omap <expr> i<C-w> operator#from_regexp#mapexpr('\w\+')
+	xmap <expr> i<C-w> operator#from_regexp#mapexpr('\w\+')
+
+	" URL にマッチする範囲
+	omap <expr> iul operator#from_regexp#mapexpr('https\?:\/\/\S\+')
+	xmap <expr> iul operator#from_regexp#mapexpr('https\?:\/\/\S\+')
+
+	" # と # の # を除いた間にマッチする範囲
+	omap <expr> i<A-s> operator#from_regexp#mapexpr('#\zs.\{-}\ze#')
+	xmap <expr> i<A-s> operator#from_regexp#mapexpr('#\zs.\{-}\ze#')
+<
+
+==============================================================================
+インターフェース				*textobj-from_regexp-interface*
+
+------------------------------------------------------------------------------
+関数						*textobj-from_regexp-functions*
+
+					*operator#from_regexp#mapexpr()*
+operator#from_regexp#mapexpr({pattern})
+	{pattern} にマッチする範囲の textobj のキーマッピングを返します。
+	カーソル上にマッチするテキストがない場合は前方のマッチするテキストの範
+	囲となります。
+Example: >
+	" 数値ににマッチする textobj
+	omap <expr> i<A-w> operator#from_regexp#mapexpr('\d\+')
+	xmap <expr> i<A-w> operator#from_regexp#mapexpr('\d\+')
+<
+
+==============================================================================
+vim:tw=78:fo=tcq2mM:ts=8:ft=help:norl
