@@ -24,7 +24,7 @@ endfunction
 
 
 let s:cache = {}
-function! operator#from_regexp#mapexpr(pattern)
+function! textobj#from_regexp#mapexpr(pattern)
 	if has_key(s:cache, a:pattern)
 		return s:cache[a:pattern]
 	endif
